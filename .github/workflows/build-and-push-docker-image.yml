@@ -1,8 +1,6 @@
 name: Build and Push Docker Image to Docker Hub
 
-on:
-  schedule:
-    - cron: "42 3 * * 0" # Run on odd minute and hour to decrease chance of delay
+on: workflow_dispatch
 jobs:
   push_to_registry:
     name: push docker image to hub
