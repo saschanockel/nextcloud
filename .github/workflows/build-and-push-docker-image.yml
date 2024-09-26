@@ -1,6 +1,10 @@
 name: Build and Push Docker Image to Docker Hub
 
-on: workflow_dispatch
+on: 
+  push:
+    tags:
+      - '*'
+
 jobs:
   push_to_registry:
     name: push docker image to hub
@@ -19,5 +23,8 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
+          target: apache
+          build-args: |
+            NEXTCLOUD_VERSION=$GITHUB_REF_NAME
           push: true
-          tags: saschanockel/nextcloud:latest
+          tags: saschanockel/nextcloud:$GITHUB_REF_NAME-apache
